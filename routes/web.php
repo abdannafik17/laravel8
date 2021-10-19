@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,7 @@ Route::get('profile', function(){
     return view('profile');
 })->name('userprofile');
 
-Route::get('siswa',function(){
-    $siswa = ['Fulan', 'Budi', 'Tini'];
-    return view('siswa.index', ['siswa' => $siswa]);
-})->name('siswa.index');
+Route::resource('siswa',SiswaController::class);
 
 Route::get('student/{id}/{name}', function($id, $name){
     return 'ID Siswa = '.$id.', name = '.$name;
