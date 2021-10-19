@@ -15,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.homepage');
-});
+})->name('halamanawal');
 
 Route::get('about', function(){
     return view('about');
-});
+})->name('halamanabout');
+
+Route::get('profile', function(){
+    return view('profile');
+})->name('userprofile');
 
 Route::get('student/{id}/{name}', function($id, $name){
     return 'ID Siswa = '.$id.', name = '.$name;

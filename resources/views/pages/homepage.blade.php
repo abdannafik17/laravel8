@@ -1,5 +1,7 @@
 @extends('template.index')
 
+@section('title', 'Halaman Awal')
+
 @section('css')
 <link href="{{ asset('sb-admin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 @stop
