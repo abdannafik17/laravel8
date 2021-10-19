@@ -1,9 +1,9 @@
 @extends('template.index')
 
-@section('title', 'Halaman Awal')
+@section('title', 'Halaman Profile')
 
 @section('css')
-<link href="{{ asset('sb-admin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+
 @stop
 
 @section('main')
@@ -305,5 +305,5 @@
 @stop
 
 @section('js')
-<script src="{{ asset('sb-admin/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+
 @stop

@@ -239,7 +239,7 @@
 </li><!-- End Dashboard Nav -->
 
 <li class="nav-item">
-  <a class="nav-link collapsed" href="{{route('employee')}}">
+  <a class="nav-link collapsed" href="{{route('siswa.index')}}">
     <i class="bi bi-person"></i>
     <span>Siswa</span>
   </a>
