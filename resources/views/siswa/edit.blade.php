@@ -30,8 +30,9 @@
 
               <!-- General Form Elements -->
               <form method="post" action="{{ url('siswa/'.$siswa->id_siswa) }}">
-                {{ csrf_field() }}
-                <input type="hidden" class="form-control" name="_method" value="PATCH">
+                @csrf
+                @method('PATCH')
+                
                 <input type="hidden" class="form-control" name="id" value="{{ $siswa->id_siswa }}">
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">NISN</label>
