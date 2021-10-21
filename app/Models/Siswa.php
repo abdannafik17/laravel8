@@ -11,4 +11,8 @@ class Siswa extends Model
 
     protected $table = 'siswa';
     protected $primaryKey = 'id_siswa';
+
+    protected $fillable = [
+        'nisn', 'nama', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin'
+    ];
 }
