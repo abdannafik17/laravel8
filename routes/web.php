@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\HomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +15,13 @@ use App\Http\Controllers\SiswaController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.homepage');
-})->name('halamanawal');
+Route::get('/', [HomePageController::class, 'index'])->name('halamanawal');
 
-Route::get('about', function(){
-    return view('about');
-})->name('halamanabout');
+Route::get('/about', 'App\Http\Controllers\AboutController@index')->name('halamanabout');
+Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('userprofile');
 
-Route::get('profile', function(){
-    return view('profile');
-})->name('userprofile');
 
-Route::resource('siswa',SiswaController::class);
+Route::resource('siswa', SiswaController::class);
 
 Route::get('student/{id}/{name}', function($id, $name){
     return 'ID Siswa = '.$id.', name = '.$name;

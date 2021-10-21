@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Siswa;
-
-class SiswaController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +13,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $siswa_list = Siswa::all();
-        return view('siswa.index', ['siswa_list' => $siswa_list]);
+        return view('profile');
     }
 
     /**
@@ -48,8 +45,7 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        $siswa = Siswa::findOrFail($id);
-        return view('siswa.show', ['siswa' => $siswa]);
+        //
     }
 
     /**
