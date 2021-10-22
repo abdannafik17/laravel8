@@ -38,6 +38,9 @@
                   <label for="inputText" class="col-sm-2 col-form-label">NISN</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="nisn" value="{{ $siswa->nisn }}" readonly>
+                    @if($errors->has('nisn'))
+                      <span style="color:red">{{ $errors->first('nisn') }}</span>
+                    @endif
                   </div>
                 </div>
 
@@ -45,6 +48,9 @@
                   <label for="inputText" class="col-sm-2 col-form-label">Nama Siswa</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="nama" value="{{ $siswa->nama }}">
+                    @if($errors->has('nama'))
+                      <span style="color:red">{{ $errors->first('nama') }}</span>
+                    @endif
                   </div>
                 </div>
 
@@ -52,13 +58,19 @@
                   <label for="inputText" class="col-sm-2 col-form-label">Tempat Lahir</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="tempat_lahir" value="{{ $siswa->tempat_lahir }}">
+                    @if($errors->has('tempat_lahir'))
+                      <span style="color:red">{{ $errors->first('tempat_lahir') }}</span>
+                    @endif
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="tanggal_lahir" value="{{ $siswa->tanggal_lahir }}">
+                    <input type="date" class="form-control" name="tanggal_lahir" value="{{ $siswa->tanggal_lahir }}">
+                    @if($errors->has('tanggal_lahir'))
+                      <span style="color:red">{{ $errors->first('tanggal_lahir') }}</span>
+                    @endif
                   </div>
                 </div>
 
@@ -79,6 +91,9 @@
                       <option value="P">Perempuan</option>
                       @endif
                     </select>
+                    @if($errors->has('jenis_kelamin'))
+                      <span style="color:red">{{ $errors->first('jenis_kelamin') }}</span>
+                    @endif
                   </div>
                 </div>
 
