@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\SiswaRequest;
 
 use App\Models\Siswa;
 
@@ -22,15 +23,8 @@ class SiswaController extends Controller
     }
 
    
-    public function store(Request $request)
+    public function store(SiswaRequest $request)
     {
-        $this->validate($request, [
-            'nisn' => 'required|string|size:4|unique:siswa,nisn',
-            'nama' => 'required|string|max:50', 
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|in:L,P',
-        ]);
         Siswa::create($request->all());
         return redirect('siswa');
     }
@@ -47,16 +41,8 @@ class SiswaController extends Controller
         return view('siswa.edit', ['siswa' => $siswa]);
     }
 
-    public function update(Request $request, $id)
+    public function update(SiswaRequest $request, $id)
     {
-        $this->validate($request, [
-            'nisn' => 'required|string|size:4|unique:siswa,nisn,'.$request->input('id').',id_siswa',
-            'nama' => 'required|string|max:50', 
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|in:L,P',
-        ]);
-
         $siswa = Siswa::findOrFail($id);
         $siswa->update($request->all());
         return redirect('siswa');
