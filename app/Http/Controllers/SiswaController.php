@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\SiswaRequest;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Siswa;
+use App\Models\Telepon;
 
 class SiswaController extends Controller
 {
@@ -25,8 +27,25 @@ class SiswaController extends Controller
    
     public function store(SiswaRequest $request)
     {
-        Siswa::create($request->all());
-        return redirect('siswa');
+        try {
+            DB::beginTransaction();
+
+            $siswa = Siswa::create($request->all());
+            // throw new Exception('Division by zero.');
+            $telepon = new Telepon();
+            $telepon->no_telepon = $request->input('no_telepon');
+            $siswa->telepon()->save($telepon);
+
+            DB::commit();
+
+            return redirect('siswa');
+
+        } catch (\Exception $e) {
+            //throw $th;
+            echo $e;
+            DB::rollback();
+        }
+        
     }
 
     public function show($id)
@@ -38,14 +57,24 @@ class SiswaController extends Controller
     public function edit($id)
     {        
         $siswa = Siswa::findOrFail($id);
+        $siswa->no_telepon = !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-';
         return view('siswa.edit', ['siswa' => $siswa]);
     }
 
     public function update(SiswaRequest $request, $id)
     {
-        $siswa = Siswa::findOrFail($id);
-        $siswa->update($request->all());
-        return redirect('siswa');
+        try {
+            DB::beginTransaction();
+
+            $siswa = Siswa::findOrFail($id);
+            $siswa->update($request->all());
+
+
+            return redirect('siswa');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        
     }
 
     /**

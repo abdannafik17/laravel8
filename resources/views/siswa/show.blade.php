@@ -54,6 +54,12 @@
                     <input type="text" class="form-control" name="tanggal_lahir" value="{{ $siswa->tanggal_lahir }}" readonly>
                   </div>
                 </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">No HP</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="no_telepon" value="{{ $siswa->no_telepon }}" readonly>
+                  </div>
+                </div>
 
               </form><!-- End General Form Elements -->
 

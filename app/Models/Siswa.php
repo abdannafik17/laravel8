@@ -15,4 +15,9 @@ class Siswa extends Model
     protected $fillable = [
         'nisn', 'nama', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin'
     ];
+
+    public function telepon()
+    {
+        return $this->hasOne('App\Models\Telepon', 'id_siswa');
+    }
 }
