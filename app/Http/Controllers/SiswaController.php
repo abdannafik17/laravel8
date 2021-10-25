@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Siswa;
 use App\Models\Telepon;
+use App\Models\Kelas;
 
 class SiswaController extends Controller
 {
@@ -21,7 +22,8 @@ class SiswaController extends Controller
    
     public function create()
     {
-        return view('siswa.create');
+        $list_kelas = Kelas::all();
+        return view('siswa.create', ['list_kelas' => $list_kelas]);
     }
 
    
@@ -56,24 +58,25 @@ class SiswaController extends Controller
 
     public function edit($id)
     {        
+        $list_kelas = Kelas::all();
         $siswa = Siswa::findOrFail($id);
         $siswa->no_telepon = !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-';
-        return view('siswa.edit', ['siswa' => $siswa]);
+        return view('siswa.edit', ['siswa' => $siswa, 'list_kelas' => $list_kelas]);
     }
 
     public function update(SiswaRequest $request, $id)
     {
-        try {
-            DB::beginTransaction();
-
+      
             $siswa = Siswa::findOrFail($id);
             $siswa->update($request->all());
-
+            
+            //update no hp
+            $telepon = $siswa->telepon;
+            $telepon->no_telepon = $request->input('no_telepon');
+            $siswa->telepon()->save($telepon);
 
             return redirect('siswa');
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+
         
     }
 

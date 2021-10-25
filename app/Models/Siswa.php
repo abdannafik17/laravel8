@@ -13,11 +13,16 @@ class Siswa extends Model
     protected $primaryKey = 'id_siswa';
 
     protected $fillable = [
-        'nisn', 'nama', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin'
+        'nisn', 'nama', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'id_kelas'
     ];
 
     public function telepon()
     {
         return $this->hasOne('App\Models\Telepon', 'id_siswa');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }
 }

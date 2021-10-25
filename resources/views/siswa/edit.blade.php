@@ -106,6 +106,22 @@
                     @endif
                   </div>
                 </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Kelas</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" name="id_kelas">
+                      <option value="" selected>--Pilih kelas--</option>
+                      @foreach($list_kelas as $kelas)
+                        <option @if($siswa->id_kelas == $kelas->id) selected @endif 
+                            value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
+                      @endforeach
+                    </select>
+                    @if($errors->has('id_kelas'))
+                      <span style="color:red">{{ $errors->first('id_kelas') }}</span>
+                    @endif
+                  </div>
+                </div>
                 
                 <div class="row mb-3">
                   <div class="col-sm-10">
