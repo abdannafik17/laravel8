@@ -15,38 +15,31 @@ use App\Http\Controllers\HomePageController;
 |
 */
 
-Route::get('/', [HomePageController::class, 'index'])->name('halamanawal');
+// Route::get('/', [HomePageController::class, 'index'])->name('halamanawal');
 
-Route::get('/about', 'App\Http\Controllers\AboutController@index')->name('halamanabout');
-Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('userprofile');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', [HomePageController::class, 'index'])->name('home');
+    Route::get('/about', 'App\Http\Controllers\AboutController@index')->name('halamanabout');
+    Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('userprofile');
 
 
-Route::resource('siswa', SiswaController::class);
-
-Route::get('student/{id}/{name}', function($id, $name){
-    return 'ID Siswa = '.$id.', name = '.$name;
-});
-
-Route::get('master/halaman-pegawai', function(){
-    return 'Halaman Pegawai';
-})->name('employee');
-
-Route::get('emp', function(){
-    return redirect()->route('employee');
+    Route::resource('siswa', SiswaController::class);
 });
 
 
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('student/{id}/{name}', function($id, $name){
+//     return 'ID Siswa = '.$id.', name = '.$name;
+// });
+
+// Route::get('master/halaman-pegawai', function(){
+//     return 'Halaman Pegawai';
+// })->name('employee');
+
+// Route::get('emp', function(){
+//     return redirect()->route('employee');
+// });
+
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
