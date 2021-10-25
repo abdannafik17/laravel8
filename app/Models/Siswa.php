@@ -25,4 +25,9 @@ class Siswa extends Model
     {
         return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }
+
+    public function hobi()
+    {
+        return $this->hasMany('App\Models\Hobi', 'hobi_siswa', 'id_siswa', 'id_hobi')->withTimeStamps();
+    }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Siswa;
 use App\Models\Telepon;
 use App\Models\Kelas;
+use App\Models\Hobi;
 
 class SiswaController extends Controller
 {
@@ -23,30 +24,35 @@ class SiswaController extends Controller
     public function create()
     {
         $list_kelas = Kelas::all();
-        return view('siswa.create', ['list_kelas' => $list_kelas]);
+        $list_hobi = Hobi::all();
+        return view('siswa.create', ['list_kelas' => $list_kelas, 'list_hobi' => $list_hobi]);
     }
 
    
     public function store(SiswaRequest $request)
     {
-        try {
+        // try {
             DB::beginTransaction();
 
             $siswa = Siswa::create($request->all());
-            // throw new Exception('Division by zero.');
+            
+            //input no telepon
             $telepon = new Telepon();
             $telepon->no_telepon = $request->input('no_telepon');
             $siswa->telepon()->save($telepon);
+
+            //input hobi
+            $siswa->hobi()->attach($request->input('hobi'));
 
             DB::commit();
 
             return redirect('siswa');
 
-        } catch (\Exception $e) {
-            //throw $th;
-            echo $e;
-            DB::rollback();
-        }
+        // } catch (\Exception $e) {
+        //     //throw $th;
+        //     echo $e;
+        //     DB::rollback();
+        // }
         
     }
 
@@ -65,19 +71,16 @@ class SiswaController extends Controller
     }
 
     public function update(SiswaRequest $request, $id)
-    {
-      
-            $siswa = Siswa::findOrFail($id);
-            $siswa->update($request->all());
-            
-            //update no hp
-            $telepon = $siswa->telepon;
-            $telepon->no_telepon = $request->input('no_telepon');
-            $siswa->telepon()->save($telepon);
-
-            return redirect('siswa');
-
+    {      
+        $siswa = Siswa::findOrFail($id);
+        $siswa->update($request->all());
         
+        //update no hp
+        $telepon = $siswa->telepon;
+        $telepon->no_telepon = $request->input('no_telepon');
+        $siswa->telepon()->save($telepon);
+
+        return redirect('siswa');  
     }
 
     /**
