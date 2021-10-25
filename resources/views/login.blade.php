@@ -107,6 +107,10 @@
                         @endif
                       <!-- <button class="btn btn-primary w-100" type="submit">Login</button> -->
                     </div>
+                    <br/>
+                    <div class="col-12">
+                    <a href="{{ url('oauth/redirect/pln') }}"><button class="btn btn-warning w-100" type="button">Login with Iam PLN</button></a>
+                    </div>
                     <div class="col-12">
                       <p class="small mb-0">Don't have account? <a href="{{ route('register') }}">Create an account</a></p>
                     </div>

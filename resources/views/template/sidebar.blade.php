@@ -213,6 +213,17 @@
         </li>
 
         <li>
+          @php
+            $sso = Session::get('login_from');
+          @endphp
+          @if($sso == 'SSO')
+            <a class="dropdown-item d-flex align-items-center" href="{{ route('logout_sso') }}">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Sign Out</span>
+            </a>
+          @endif
+
+          @if($sso != 'SSO')
           <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
               onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
@@ -222,6 +233,7 @@
           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
               @csrf
           </form>
+          @endif
         </li>
 
       </ul><!-- End Profile Dropdown Items -->
