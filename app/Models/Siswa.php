@@ -28,6 +28,6 @@ class Siswa extends Model
 
     public function hobi()
     {
-        return $this->hasMany('App\Models\Hobi', 'hobi_siswa', 'id_siswa', 'id_hobi')->withTimeStamps();
+        return $this->belongsToMany('App\Models\Hobi', 'hobi_siswa', 'id_siswa', 'id_hobi')->withTimeStamps();
     }
 }

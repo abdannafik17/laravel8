@@ -13,8 +13,8 @@
       <h1>Detail Siswa</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Siswa</li>
+          <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{ url('siswa') }}">Siswa</a></li>
           <li class="breadcrumb-item active">Detail Siswa</li>
         </ol>
       </nav>
@@ -54,10 +54,27 @@
                     <input type="text" class="form-control" name="tanggal_lahir" value="{{ $siswa->tanggal_lahir }}" readonly>
                   </div>
                 </div>
+
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">No HP</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="no_telepon" value="{{ $siswa->no_telepon }}" readonly>
+                    <input type="text" class="form-control" name="no_telepon" value="{{ $siswa->telepon->no_telepon }}" readonly>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Kelas</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="no_telepon" value="{{ $siswa->kelas->nama_kelas }}" readonly>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Hobi</label>
+                  <div class="col-sm-10">
+                    @foreach($siswa->hobi as $h)
+                      <strong><span>{{$h->nama_hobi}} , </span></strong>
+                    @endforeach
                   </div>
                 </div>
 

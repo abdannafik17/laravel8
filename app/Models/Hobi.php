@@ -15,6 +15,6 @@ class Hobi extends Model
 
     public function siswa()
     {
-        return $this->hasMany('App\Models\Siswa', 'hobi_siswa', 'id_hobi', 'id_siswa');
+        return $this->belongsToMany('App\Models\Siswa', 'hobi_siswa', 'id_hobi', 'id_siswa');
     }
 }

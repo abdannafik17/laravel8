@@ -31,29 +31,21 @@ class SiswaController extends Controller
    
     public function store(SiswaRequest $request)
     {
-        // try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
-            $siswa = Siswa::create($request->all());
-            
-            //input no telepon
-            $telepon = new Telepon();
-            $telepon->no_telepon = $request->input('no_telepon');
-            $siswa->telepon()->save($telepon);
-
-            //input hobi
-            $siswa->hobi()->attach($request->input('hobi'));
-
-            DB::commit();
-
-            return redirect('siswa');
-
-        // } catch (\Exception $e) {
-        //     //throw $th;
-        //     echo $e;
-        //     DB::rollback();
-        // }
+        $siswa = Siswa::create($request->all());
         
+        //input no telepon
+        $telepon = new Telepon();
+        $telepon->no_telepon = $request->input('no_telepon');
+        $siswa->telepon()->save($telepon);
+
+        //input hobi
+        $siswa->hobi()->attach($request->input('hobi'));
+
+        DB::commit();
+
+        return redirect('siswa');
     }
 
     public function show($id)
@@ -65,9 +57,10 @@ class SiswaController extends Controller
     public function edit($id)
     {        
         $list_kelas = Kelas::all();
+        $list_hobi = Hobi::all();
         $siswa = Siswa::findOrFail($id);
         $siswa->no_telepon = !empty($siswa->telepon->no_telepon) ? $siswa->telepon->no_telepon : '-';
-        return view('siswa.edit', ['siswa' => $siswa, 'list_kelas' => $list_kelas]);
+        return view('siswa.edit', ['siswa' => $siswa, 'list_kelas' => $list_kelas, 'list_hobi' => $list_hobi]);
     }
 
     public function update(SiswaRequest $request, $id)
@@ -79,6 +72,11 @@ class SiswaController extends Controller
         $telepon = $siswa->telepon;
         $telepon->no_telepon = $request->input('no_telepon');
         $siswa->telepon()->save($telepon);
+
+        //update hobi
+        if(!empty($request->input('hobi'))) {
+            $siswa->hobi()->sync($request->input('hobi'));
+        }
 
         return redirect('siswa');  
     }
