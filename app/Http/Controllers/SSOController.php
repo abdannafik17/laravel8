@@ -17,7 +17,8 @@ class SSOController extends Controller
 
         $client_id = env('PLN_ID');
         $redirect_uri = env('PLN_REDIRECT');
-        $url = 'https://iam.pln.co.id/svc-core/oauth2/auth?response_type=code&client_id=' . $client_id . '&redirect_uri=' . $redirect_uri . '&scope=openid email profile empinfo phone address';
+        $url = 'https://iam.pln.co.id/svc-core/oauth2/auth?response_type=code&client_id=' 
+        . $client_id . '&redirect_uri=' . $redirect_uri . '&scope=openid email profile empinfo phone address';
 
         return redirect($url);
 
@@ -97,7 +98,7 @@ class SSOController extends Controller
             // User baru
             $user = new User();
         }
-
+        // dd($user_sso->get('https://iam.pln.co.id/svc-core/account/hrinfo'));
         $user->username = strtolower($username_ad);
         try{
             $company = $user_sso->get('https://iam.pln.co.id/svc-core/account/hrinfo')['personnelArea']['name'];
@@ -135,6 +136,7 @@ class SSOController extends Controller
     {
         $login_from = session('login_from');
         $urlLogout = url('logout');
+        
         $ur_logout_sso = 'https://iam.pln.co.id/svc-core/oauth2/session/end?post_logout_redirect_uri=' . $urlLogout . '&id_token_hint=' . session('id_token');
         // dd($ur_logout_sso);
 

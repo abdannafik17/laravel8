@@ -224,7 +224,7 @@
           @endif
 
           @if($sso != 'SSO')
-          <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
+          <a class="dropdown-item d-flex align-items-center" href="{{ route('logout_local') }}"
               onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
               <i class="bi bi-box-arrow-right"></i>

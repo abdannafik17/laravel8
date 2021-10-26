@@ -42,9 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Auth::routes();
 Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
-Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'], function () {
-    return abort(404);
-});
+Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout_local');
 
 Route::get('/oauth/redirect/pln', [App\Http\Controllers\SSOController::class, 'getPLNRedirect']);
 Route::get('/oauth/handle/pln', [App\Http\Controllers\SSOController::class, 'getPLNHandle']);
