@@ -135,9 +135,8 @@ class SSOController extends Controller
     {
         $login_from = session('login_from');
         $urlLogout = url('logout');
-        // $ur_logout_sso = 'https://iam.pln.co.id/svc-core/oauth2/session/end?post_logout_redirect_uri=' . env('POST_LOGOUT_REDIRECT_URI', 'http://localhost:8800/auth/logout') . '&id_token_hint=' . session('id_token');
         $ur_logout_sso = 'https://iam.pln.co.id/svc-core/oauth2/session/end?post_logout_redirect_uri=' . $urlLogout . '&id_token_hint=' . session('id_token');
-//        dd($ur_logout_sso);
+        // dd($ur_logout_sso);
 
         if ($login_from == 'SSO') {
             return redirect($ur_logout_sso);

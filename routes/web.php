@@ -45,6 +45,7 @@ Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginFor
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'], function () {
     return abort(404);
 });
+
 Route::get('/oauth/redirect/pln', [App\Http\Controllers\SSOController::class, 'getPLNRedirect']);
 Route::get('/oauth/handle/pln', [App\Http\Controllers\SSOController::class, 'getPLNHandle']);
 Route::get('/oauth/logout', [App\Http\Controllers\SSOController::class, 'logoutSSO'])->name('logout_sso');
