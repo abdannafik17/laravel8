@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 
 use App\Models\Siswa;
 use App\Models\Kelas;
+use App\Models\Globalvar;
 
 class ImportSiswaCmd extends Command
 {
@@ -40,7 +41,7 @@ class ImportSiswaCmd extends Command
      */
     public function handle()
     {
-        $data_kelas = 'XII-H';
+        $data_kelas = 'XII-J';
         $simpan = Kelas::where('nama_kelas','=',$data_kelas)->get()->first();
 
         if(empty($simpan)) {
@@ -49,5 +50,9 @@ class ImportSiswaCmd extends Command
         } 
         $simpan->nama_kelas = $data_kelas;
         $simpan->save();
+
+        $gv = Globalvar::where('varname', '=','import_siswa')->get()->first();
+        $gv->varvalue = '0';
+        $gv->save();
     }
 }
